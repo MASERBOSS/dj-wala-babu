@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from utils.HelpPaginator import HelpPaginator, CannotPaginate
 
-class Misc():
+class Misc(commands.Cog):
     """Miscellaneous commands"""
     def __init__(self, bot):
         self.bot = bot
