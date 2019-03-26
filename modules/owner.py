@@ -35,6 +35,7 @@ class Admin(commands.Cog):
             return
 
 
+    @commands.is_owner
     @commands.command(pass_context=True, hidden=True, name='eval', aliases=['evaluate'])
     async def _eval(self, ctx, *, body: str):
         """Evaluates a piece of code"""
@@ -93,6 +94,8 @@ class Admin(commands.Cog):
                 ssfooem.timestamp = ctx.message.created_at
                 await ctx.send(embed=ssfooem)
 
+
+    @commands.is_owner
     @commands.command(hidden=True, aliases=['die'])
     async def logout(self, ctx):
         """Logs out bot from Discord"""
@@ -102,6 +105,8 @@ class Admin(commands.Cog):
     async def echo(self, ctx, *, content):
         await ctx.send(content)
 
+
+    @commands.is_owner
     @commands.command(hidden=True, aliases=["impersonate"])
     async def runas(self, ctx, member: discord.Member, *, cmd):
         """Invoke bot command as specified user"""
@@ -110,12 +115,16 @@ class Admin(commands.Cog):
         msg.author = member
         await self.bot.process_commands(msg)
 
+
+    @commands.is_owner
     @commands.command(hidden=True, aliases=['r'])
     async def restart(self, ctx):
         """Restarts the bot"""
         await ctx.send(embed=discord.Embed(color=self.bot.color).set_footer(text="Restarting..."))
         os.execl(sys.executable, sys.executable, * sys.argv)
 
+
+    @commands.is_owner
     @commands.command(hidden=True, aliases=['cc'])
     async def changecolor(self, ctx, *, color):
         """Change the bot color (temporary)
